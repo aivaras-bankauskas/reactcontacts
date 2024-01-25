@@ -8,7 +8,13 @@ export default {
 		extend: {
 			colors: {
 				'body-light': '#e4e4e7',
-				'body-dark': '#000000'
+				'body-dark': '#000000',
+				'light': '#ffffff',
+				'dark': '#18181b',
+				'color-light': '#000000',
+				'color-dark': '#ffffff',
+				'divider-light': '#e5e7eb',
+				'divider-dark': '#27272a'
 			}
 		}
 	},
