@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import Person from '@/data/models/personModel';
 
-const createAutoIncrement = (start: number = 0): (() => number) => {
+export const createAutoIncrement = (start: number = 0): (() => number) => {
 	let count = start;
 
 	return () => {
@@ -11,7 +11,7 @@ const createAutoIncrement = (start: number = 0): (() => number) => {
 	};
 };
 
-const generateContacts = (length: number, taskIdGen: () => number): Person[] => {
+export const generateContacts = (length: number, taskIdGen: () => number): Person[] => {
 	return Array.from({ length }, () => ({
 		id: taskIdGen(),
 		firstName: faker.person.firstName(),
