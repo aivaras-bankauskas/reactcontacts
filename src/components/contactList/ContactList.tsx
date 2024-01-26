@@ -1,4 +1,4 @@
-import ContactPerson from '@/components/contacts/ContactPerson';
+import ContactPerson from '@/components/contactPerson/ContactPerson';
 import contacts from '@/data/mocks/contactsMock';
 import Person from '@/data/models/personModel';
 
