@@ -12,13 +12,19 @@ export const createAutoIncrement = (start: number = 0): (() => number) => {
 };
 
 export const generateContacts = (length: number, taskIdGen: () => number): Contact[] => {
-	return Array.from({ length }, () => ({
-		id: taskIdGen(),
-		firstName: faker.person.firstName(),
-		lastName: faker.person.lastName(),
-		createdAt: faker.date.past().toISOString(),
-		updatedAt: faker.date.recent().toISOString()
-	}));
+	return Array.from({ length }, () => {
+		const firstName = faker.person.firstName();
+		const lastName = faker.person.lastName();
+
+		return {
+			id: taskIdGen(),
+			firstName,
+			lastName,
+			slug: faker.helpers.slugify(firstName + ' ' + lastName).toLowerCase(),
+			createdAt: faker.date.past().toISOString(),
+			updatedAt: faker.date.recent().toISOString()
+		};
+	});
 };
 
 const contacts = generateContacts(99, createAutoIncrement());
