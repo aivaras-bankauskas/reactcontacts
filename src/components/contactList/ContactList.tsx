@@ -26,7 +26,7 @@ function ContactList(): JSX.Element {
 					<h3 className="font-semibold text-zinc-400 mt-6 mb-1">{letter}</h3>
 					<ul role="list" className="divide-y divide-divider-light dark:divide-divider-dark border-y border-divider-light dark:border-divider-dark">
 						{contacts.map((contact: Contact) => (
-							<ContactItem key={contact.id} firstName={contact.firstName} lastName={contact.lastName} />
+							<ContactItem key={contact.id} slug={contact.slug} firstName={contact.firstName} lastName={contact.lastName} />
 						))}
 					</ul>
 				</div>
