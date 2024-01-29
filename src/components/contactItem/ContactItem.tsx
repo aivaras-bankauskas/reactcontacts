@@ -1,6 +1,6 @@
-import Person from '@/data/models/personModel';
+import Contact from '@/data/models/contactModel';
 
-function ContactPerson({ firstName, lastName }: Person): JSX.Element {
+function ContactItem({ firstName, lastName }: Contact): JSX.Element {
 	return (
 		<li className="flex justify-between gap-x-6 py-2.5">
 			<div className="flex min-w-0 gap-x-4">
@@ -13,4 +13,4 @@ function ContactPerson({ firstName, lastName }: Person): JSX.Element {
 	);
 }
 
-export default ContactPerson;
+export default ContactItem;

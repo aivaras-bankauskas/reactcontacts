@@ -1,16 +1,16 @@
-import ContactPerson from '@/components/contactPerson/ContactPerson';
+import ContactItem from '@/components/contactItem/ContactItem';
 import contacts from '@/data/mocks/contactsMock';
-import Person from '@/data/models/personModel';
+import Contact from '@/data/models/contactModel';
 
-const groupContactsByFirstLetter = (contacts: Person[]): Record<string, Person[]> => {
-	const grouped = {} as Record<string, Person[]>;
+const groupContactsByFirstLetter = (contacts: Contact[]): Record<string, Contact[]> => {
+	const grouped = {} as Record<string, Contact[]>;
 
-	contacts.forEach(person => {
-		const firstLetter = person.firstName.charAt(0).toUpperCase();
+	contacts.forEach(contact => {
+		const firstLetter = contact.firstName.charAt(0).toUpperCase();
 		if (!grouped[firstLetter]) {
 			grouped[firstLetter] = [];
 		}
-		grouped[firstLetter].push(person);
+		grouped[firstLetter].push(contact);
 	});
 
 	return grouped;
@@ -21,12 +21,12 @@ function ContactList(): JSX.Element {
 
 	return (
 		<>
-			{Object.entries(groupedContacts).map(([letter, people]) => (
+			{Object.entries(groupedContacts).map(([letter, contacts]) => (
 				<div key={letter}>
 					<h3 className="font-semibold text-zinc-400 mt-6 mb-1">{letter}</h3>
 					<ul role="list" className="divide-y divide-divider-light dark:divide-divider-dark border-y border-divider-light dark:border-divider-dark">
-						{people.map((person: Person) => (
-							<ContactPerson key={person.id} firstName={person.firstName} lastName={person.lastName} />
+						{contacts.map((contact: Contact) => (
+							<ContactItem key={contact.id} firstName={contact.firstName} lastName={contact.lastName} />
 						))}
 					</ul>
 				</div>
