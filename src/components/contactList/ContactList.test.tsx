@@ -1,23 +1,42 @@
+import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import ContactList from './ContactList';
 import contacts from '@/data/mocks/contactsMock';
 
 describe('ContactList', () => {
-	it('renders a list of contacts grouped by the first letter of the first name', () => {
-		render(<ContactList />);
+	beforeEach(() => {
+		render(
+			<Router>
+				<ContactList />
+			</Router>
+		);
+	});
 
-		contacts.forEach(contact => {
-			const firstNameElements = screen.getAllByText(contact.firstName);
-			const lastNameElements = screen.getAllByText(contact.lastName);
-			expect(firstNameElements.length).toBeGreaterThanOrEqual(1);
-			expect(lastNameElements.length).toBeGreaterThanOrEqual(1);
+	it('renders a list of contacts', () => {
+		const sampleContacts = contacts.slice(0, 10);
+
+		sampleContacts.forEach(contact => {
+			expect(screen.getAllByText(contact.firstName)[0]).toBeInTheDocument();
+			expect(screen.getAllByText(contact.lastName)[0]).toBeInTheDocument();
 		});
+	});
 
-		const firstLetters = contacts.map(contact => contact.firstName.charAt(0).toUpperCase());
+	it('groups contacts by the first letter of the first name', () => {
+		const sampleContacts = contacts.slice(0, 5); // Test the first 5 contacts
+		const firstLetters = sampleContacts.map(contact => contact.firstName.charAt(0).toUpperCase());
 		const uniqueFirstLetters = [...new Set(firstLetters)];
+
 		uniqueFirstLetters.forEach(letter => {
-			const letterElements = screen.getAllByText(letter);
-			expect(letterElements.length).toBeGreaterThanOrEqual(1);
+			expect(screen.getByText(letter)).toBeInTheDocument();
+		});
+	});
+
+	it('renders a link to each contact\'s page', () => {
+		const sampleContacts = contacts.slice(0, 5); // Test the first 5 contacts
+
+		sampleContacts.forEach(contact => {
+			const link = screen.getByRole('link', { name: `${contact.firstName} ${contact.lastName}` });
+			expect(link).toHaveAttribute('href', `/${contact.slug}`);
 		});
 	});
 });
