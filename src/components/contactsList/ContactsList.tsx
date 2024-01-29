@@ -26,7 +26,7 @@ function ContactList(): JSX.Element {
 					<h3 className="font-semibold text-zinc-400 mt-6 mb-1">{letter}</h3>
 					<ul role="list" className="divide-y divide-divider-light dark:divide-divider-dark border-y border-divider-light dark:border-divider-dark">
 						{contacts.map((contact: Contact) => (
-							<li className="flex justify-between gap-x-6 py-2.5">
+							<li key={contact.id} className="flex justify-between gap-x-6 py-2.5">
 								<Link to={`/${contact.slug}`}>
 									<div className="flex min-w-0 gap-x-4">
 										<div className="flex min-w-0 gap-x-2">
