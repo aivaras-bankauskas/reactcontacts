@@ -13,6 +13,7 @@ export default {
 				'dark': '#18181b',
 				'color-light': '#000000',
 				'color-dark': '#ffffff',
+				'color-link': '#3b82f6',
 				'divider-light': '#e5e7eb',
 				'divider-dark': '#27272a'
 			}

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import Person from '@/data/models/personModel';
+import Contact from '@/data/models/contactModel';
 
 export const createAutoIncrement = (start: number = 0): (() => number) => {
 	let count = start;
@@ -11,14 +11,20 @@ export const createAutoIncrement = (start: number = 0): (() => number) => {
 	};
 };
 
-export const generateContacts = (length: number, taskIdGen: () => number): Person[] => {
-	return Array.from({ length }, () => ({
-		id: taskIdGen(),
-		firstName: faker.person.firstName(),
-		lastName: faker.person.lastName(),
-		createdAt: faker.date.past().toISOString(),
-		updatedAt: faker.date.recent().toISOString()
-	}));
+export const generateContacts = (length: number, taskIdGen: () => number): Contact[] => {
+	return Array.from({ length }, () => {
+		const firstName = faker.person.firstName();
+		const lastName = faker.person.lastName();
+
+		return {
+			id: taskIdGen(),
+			firstName,
+			lastName,
+			slug: faker.helpers.slugify(firstName + ' ' + lastName).toLowerCase(),
+			createdAt: faker.date.past().toISOString(),
+			updatedAt: faker.date.recent().toISOString()
+		};
+	});
 };
 
 const contacts = generateContacts(99, createAutoIncrement());
